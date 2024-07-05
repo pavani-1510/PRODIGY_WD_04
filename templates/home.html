@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .project-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center my-4">
+            <h1>{{ about_me.name }}</h1>
+            <img src="{{ about_me.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+            <p>{{ about_me.bio }}</p>
+        </header>
+
+        <section class="my-4">
+            <h2>Projects</h2>
+            <ul class="list-unstyled">
+                {% for project in projects %}
+                    <li class="media my-4">
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image mr-3">
+                        {% endif %}
+                        <div class="media-body">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.description }}</p>
+                            {% if project.url %}
+                                <a href="{{ project.url }}" class="btn btn-primary">View Project</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="my-4">
+            <h2>Skills</h2>
+            <ul class="list-inline">
+                {% for skill in skills %}
+                    <li class="list-inline-item badge badge-secondary p-2">{{ skill.name }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
